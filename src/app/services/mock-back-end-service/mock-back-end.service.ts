@@ -4,4 +4,17 @@ import { Injectable } from '@angular/core';
 export class MockBackEndService {
 
   constructor() { }
+
+  public getMatches() {
+
+  }
+
+  public getMatch() {
+
+  }
+
+  public getStandings() {
+
+  }
+
 }
