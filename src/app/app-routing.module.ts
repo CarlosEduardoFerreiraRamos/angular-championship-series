@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: 'home', loadChildren: './pages/home/home.module#HomeModule'},
+  {path: 'matches', loadChildren: './pages/matches/matches.module#MatchesModule'},
+  {path: 'standings', loadChildren: './pages/standings/standings.module#StandingsModule'},
+  {path: '**', redirectTo: 'home'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

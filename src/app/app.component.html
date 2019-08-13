@@ -2,9 +2,9 @@
 
 <mat-toolbar color="primary">
   <span>Tournament Manager</span>
-  <button mat-button>HOME</button>
-  <button mat-button>MATCHES</button>
-  <button mat-button>STANDINGS</button>
+  <button mat-button [routerLink]="[ '/home' ]">HOME</button>
+  <button mat-button [routerLink]="[ '/matches' ]">MATCHES</button>
+  <button mat-button [routerLink]="[ '/standings' ]">STANDINGS</button>
 </mat-toolbar>
 
 
