@@ -48,7 +48,7 @@ import {
   import {CdkTableModule} from '@angular/cdk/table';
   import {CdkTreeModule} from '@angular/cdk/tree';
   import {DragDropModule} from '@angular/cdk/drag-drop';
-import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
   
   /**
    * NgModule that includes all Material modules.
