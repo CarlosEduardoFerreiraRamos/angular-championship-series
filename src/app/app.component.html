@@ -2,9 +2,56 @@
 
 <mat-toolbar color="primary">
   <span>Tournament Manager</span>
+  <button mat-button>HOME</button>
+  <button mat-button>MATCHES</button>
+  <button mat-button>STANDINGS</button>
 </mat-toolbar>
 
-<table mat-table #table [dataSource]="dataSource">
+
+<strong>Upcoming Matches</strong>
+<mat-divider></mat-divider>
+
+<table mat-table #tableUpcoming [dataSource]="dataUpcoming">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="teams">
+    <th mat-header-cell *matHeaderCellDef> Teams </th>
+    <td mat-cell *matCellDef="let row"> {{row.teams}} </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date'];"></tr>
+</table>
+
+<strong>Recents Matches</strong>
+<mat-divider></mat-divider>
+
+<table mat-table #tableRecents [dataSource]="dataRecents">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="teams">
+    <th mat-header-cell *matHeaderCellDef> Teams </th>
+    <td mat-cell *matCellDef="let row"> {{row.teams}} </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date'];"></tr>
+</table>
+
+<strong>Standings</strong>
+<mat-divider></mat-divider>
+
+<table mat-table #tableStandings [dataSource]="dataStandings">
   <ng-container matColumnDef="column">
     <th mat-header-cell *matHeaderCellDef> header </th>
     <td mat-cell *matCellDef="let row"> {{row.column}} </td>
