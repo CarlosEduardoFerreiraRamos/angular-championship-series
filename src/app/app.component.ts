@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-
-class Matche {
-  id: number;
-  teams: string[];
-  date: Date;
-}
+import { Match } from './models/marches';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +8,7 @@ class Matche {
 })
 export class AppComponent {
   title = 'angular-championship-series';
-  dataUpcoming  = [new Matche()];
-  dataRecents  = [new Matche()];
+  dataUpcoming  = [new Match()];
+  dataRecents  = [new Match()];
   dataStandings  = [{ column: 'Column value' }];
 }
