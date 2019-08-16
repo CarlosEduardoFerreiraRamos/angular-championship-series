@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatchService } from 'src/app/services/match-service/match.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-matches',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatchesComponent implements OnInit {
 
-  constructor() { }
+  dataList;
+
+  constructor(private _service: MatchService) { }
 
   ngOnInit() {
+    this._service.getAll().pipe( tap( v => this.dataList = v) ).subscribe()
   }
 
 }

@@ -32,10 +32,13 @@
 <mat-divider></mat-divider>
 
 <table mat-table #tableRecents [dataSource]="dataRecents">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+  <ng-container *ngFor="let name of recentsColumns">
+    <ng-container [matColumnDef]="name">
+      <th mat-header-cell *matHeaderCellDef> {{name}} </th>
+      <td mat-cell *matCellDef="let row"> {{row[name]}} </td>
+    </ng-container>
   </ng-container>
+<!--   
   <ng-container matColumnDef="teams">
     <th mat-header-cell *matHeaderCellDef> Teams </th>
     <td mat-cell *matCellDef="let row"> {{row.teams}} </td>
@@ -47,9 +50,9 @@
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef> type </th>
     <td mat-cell *matCellDef="let row"> {{row.type}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date', 'type']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date', 'type'];"></tr>
+  </ng-container> -->
+  <tr mat-header-row *matHeaderRowDef="recentsColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: recentsColumns;"></tr>
 </table>
 
 <strong>Standings</strong>

@@ -68,7 +68,7 @@ export class BackEndService {
 
     const types = Object.keys(Playoffs);
     const number = types.indexOf(team.type);
-    const newStage = types[number + 1]
+    const newStage = types[number + 1];
     team.type = Playoffs[newStage];
     let match = this.validMatchs
       .reverse()
@@ -78,7 +78,7 @@ export class BackEndService {
       match = new Match();
       match.type = team.type;
       match.teams = [team];
-      this.matchs.push(match)
+      this.matchs.push(match);
     } else {
       match.teams.push(team);
     }

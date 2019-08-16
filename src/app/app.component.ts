@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'angular-championship-series';
   dataUpcoming  = [new Match()];
   dataRecents: any  = [new Match()];
+  recentsColumns = ['id', 'teams', 'date', 'type'];
   dataStandings: any  = [{ column: 'Column value' }];
 
   constructor(private _service: MatchService) {
