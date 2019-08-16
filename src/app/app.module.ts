@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { MatchService } from './services/match-service/match.service';
 import { InterceptorServiceModule } from './services/interceptor-service/interceptor-service.module';
+import { BackEndModule } from './mock-back-end/back-end/back-end.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { InterceptorServiceModule } from './services/interceptor-service/interce
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BackEndModule,
     InterceptorServiceModule,
     MaterialModule
   ],

@@ -44,20 +44,36 @@
     <th mat-header-cell *matHeaderCellDef> Date </th>
     <td mat-cell *matCellDef="let row"> {{row.date}} </td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date'];"></tr>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> type </th>
+    <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date', 'type']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date', 'type'];"></tr>
 </table>
 
 <strong>Standings</strong>
 <mat-divider></mat-divider>
 
 <table mat-table #tableStandings [dataSource]="dataStandings">
-  <ng-container matColumnDef="column">
-    <th mat-header-cell *matHeaderCellDef> header </th>
-    <td mat-cell *matCellDef="let row"> {{row.column}} </td>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['column']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['column'];"></tr>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> name </th>
+    <td mat-cell *matCellDef="let row" (click)="win(row.name)"> {{row.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="out">
+    <th mat-header-cell *matHeaderCellDef> out </th>
+    <td mat-cell *matCellDef="let row"> {{row.out}} </td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> type </th>
+    <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['id', 'name', 'out', 'type']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'out', 'type'];"></tr>
 </table>
 
 
