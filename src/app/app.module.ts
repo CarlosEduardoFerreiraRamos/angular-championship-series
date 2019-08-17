@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { MatchService } from './services/match-service/match.service';
 import { InterceptorServiceModule } from './services/interceptor-service/interceptor-service.module';
 import { BackEndModule } from './mock-back-end/back-end/back-end.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BackEndModule } from './mock-back-end/back-end/back-end.module';
     HttpClientModule,
     BackEndModule,
     InterceptorServiceModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [MatchService],
   bootstrap: [AppComponent]

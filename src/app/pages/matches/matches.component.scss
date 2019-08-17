@@ -1,0 +1,12 @@
+.form-field-container {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.mat-form-field {
+    margin: 0px 18px;
+
+    &.form-text-search {
+        width: 400px;
+    }
+}

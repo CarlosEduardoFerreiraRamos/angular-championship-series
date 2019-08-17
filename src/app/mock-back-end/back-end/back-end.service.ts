@@ -85,6 +85,7 @@ export class BackEndService {
 
     match.id = this.matchs.length + 1;
     match.played = false;
+    match.date = new Date();
     return team;
   }
 

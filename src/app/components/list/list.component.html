@@ -1,13 +1,20 @@
 <ng-container *ngIf="columns">
-  <table mat-table #tableRecents [dataSource]="data">
+  <table mat-table #tableRecents [dataSource]="data" class="mat-elevation-z8">
     <ng-container *ngFor="let name of columns">
       <ng-container [matColumnDef]="name">
-        <th mat-header-cell *matHeaderCellDef> {{name}} </th>
-        <td mat-cell *matCellDef="let row"> {{row[name]}} </td>
+        <th mat-header-cell *matHeaderCellDef> {{name | uppercase}} </th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngIf="!content">
+            {{row[name]}}
+          </ng-container>
+          <ng-template *ngIf="content"
+            [ngTemplateOutlet]="content"
+            [ngTemplateOutletContext]="{$implicit:row[name], name:name}">
+          </ng-template>
+        </td>
       </ng-container>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns;"></tr>
   </table>
 </ng-container>
-  
