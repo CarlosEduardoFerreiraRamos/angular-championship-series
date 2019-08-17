@@ -13,12 +13,14 @@ export class InterceptorService implements HttpInterceptor {
 
   private manegeRequesitions(request: HttpRequest<any>): HttpResponse<any> {
     let response: any = {status: 200};
-    
     if (request.url.includes('winner')) {
       this._backEnd.setMatchWinner(request.body.name)
       response = {...response, body: {}};
     } else if (request.method === 'GET' && request.url.includes('teams')) {
       response = {...response, body: this._backEnd.getTeamList()};
+    } else if (request.method === 'GET' && request.url.includes('?') ) {
+      const [, queryParamns] = request.url.split('?');
+      response = {...response, body: this._backEnd.getFilteredMatchList(queryParamns)};
     } else if (request.method === 'GET' ) {
       response = {...response, body: this._backEnd.getMatchList()};
     }

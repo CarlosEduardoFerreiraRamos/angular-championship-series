@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatchesRoutingModule } from './matches-routing.module';
 import { MatchesComponent } from './matches.component';
 import { ListModule } from 'src/app/components/list/list.module';
-import { MatInputModule, MatDatepickerModule } from '@angular/material';
+import { MatInputModule, MatDatepickerModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { FormModule } from 'src/app/components/form/form.module';
 
@@ -15,6 +15,8 @@ import { FormModule } from 'src/app/components/form/form.module';
     MatchesRoutingModule,
     MatInputModule,
     MatDatepickerModule,
+    MatButtonModule,
+    MatIconModule,
     FormsModule,
     FormModule,
     ListModule

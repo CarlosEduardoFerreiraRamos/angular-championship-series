@@ -9,12 +9,13 @@ export class MatchService {
 
   constructor(private _http: HttpClient) { }
 
-  public getAll(): Observable<Match[]> {
-    return  this._http.get<Match[]>(this.basePath);
+  public getAll(filters?: any): Observable<Match[]> {
+    const path = filters ? `${this.basePath}${this.buildQueryParamns(filters)}` : this.basePath;
+    return this._http.get<Match[]>(path);
   }
 
   public getAllTeams(): Observable<Team[]> {
-    return  this._http.get<Team[]>(`${this.basePath}/teams`);
+    return this._http.get<Team[]>(`${this.basePath}/teams`);
   }
 
   public get(id: number): Observable<Match> {
@@ -27,5 +28,12 @@ export class MatchService {
 
   private get basePath(): string {
     return `${environment.api}/match`;
+  }
+
+  private buildQueryParamns(paramns): string {
+    const keyValue = Object.keys(paramns)
+      .filter( key => paramns[key])
+      .reduce( ( value, key) => `${value ? `${value},` : value }${key}=${paramns[key]}`, '');
+    return keyValue ? `?${keyValue}` : '';
   }
 }

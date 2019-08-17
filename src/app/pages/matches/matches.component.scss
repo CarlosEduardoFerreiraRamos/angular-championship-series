@@ -1,12 +1,16 @@
 .form-field-container {
     margin: 0 auto;
     width: 90%;
+
+    button {
+        color: #757575
+    }
 }
 
 .mat-form-field {
-    margin: 0px 18px;
+    margin: 0px 14px;
 
     &.form-text-search {
-        width: 400px;
+        width: 380px;
     }
 }

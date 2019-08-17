@@ -52,6 +52,30 @@ export class BackEndService {
     return [...this.matchs].reverse();
   }
 
+  getFilteredMatchList(queryParamns: string): Match[] {
+    const filters = this.extractQueryParamns(queryParamns);
+    return [...this.matchs]
+      .filter( (match: Match) => {
+        let isSimilar = true;
+        if (filters['team']) {
+          isSimilar = match.teams
+            .map( t => t.name.toLowerCase() )
+            .reduce( (has, name) =>
+              has ? has : name.toLowerCase().includes(filters['team'].toLowerCase())
+            , false);
+        }
+        if (filters['dateBefore']) {
+          isSimilar = isSimilar && match.date >= new Date(filters['dateBefore']);
+        }
+        if (filters['dateAfter']) {
+          const after = new Date(filters['dateAfter']);
+          after.setHours(23, 59, 59);
+          isSimilar = isSimilar && match.date <= after;
+        }
+        return isSimilar;
+      });
+  }
+
   getTeamList(): Team[] {
     return this.teams;
   }
@@ -85,7 +109,9 @@ export class BackEndService {
 
     match.id = this.matchs.length + 1;
     match.played = false;
-    match.date = new Date();
+    const date = new Date();
+    date.setDate(match.id);
+    match.date = date;
     return team;
   }
 
@@ -112,6 +138,13 @@ export class BackEndService {
 
   private get validMatchs(): Match[] {
     return this.matchs.filter( ({played}) => !played );
+  }
+
+  private extractQueryParamns(aqueryParamns: string): any {
+    return aqueryParamns.split(',').reduce( (paramns, keyValue) => {
+      const [ key, value] = keyValue.split('=');
+      return {...paramns, [key]: value };
+    }, {});
   }
 
 }

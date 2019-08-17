@@ -4,15 +4,18 @@
       <input ngModel matInput type="text" name="team" id="team" placeholder="Search by team">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [matDatepicker]="pickerBefore" placeholder="Choose a date">
+      <input ngModel matInput [matDatepicker]="pickerBefore" name="dateBefore" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="pickerBefore"></mat-datepicker-toggle>
       <mat-datepicker #pickerBefore></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [matDatepicker]="pickerAfter" placeholder="Choose a date">
+      <input ngModel matInput [matDatepicker]="pickerAfter" name="dateAfter" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="pickerAfter"></mat-datepicker-toggle>
       <mat-datepicker #pickerAfter></mat-datepicker>
     </mat-form-field>
+    <button type="submit" mat-icon-button>
+        <mat-icon>search</mat-icon>
+    </button>
   </div>
 </app-form>
 
