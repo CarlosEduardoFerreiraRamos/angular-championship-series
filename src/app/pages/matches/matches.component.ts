@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatchService } from 'src/app/services/match-service/match.service';
 import { tap, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Match } from 'src/app/models/marches';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 @Component({
   selector: 'app-matches',
@@ -15,6 +16,8 @@ export class MatchesComponent implements OnInit {
   set matchs(v: Observable<Match[]>) {
     this._matchs$ = v;
   }
+
+  @ViewChild('modal') modal: ModalComponent;
 
   private _matchs$: Observable<Match[]>;
 
@@ -37,7 +40,8 @@ export class MatchesComponent implements OnInit {
   }
 
   onRowClick($event: Match) {
-    console.log($event)
+    this.modal.onOpen();
+    console.log($event);
   }
 
   private fetchMaches(values?: any): void {

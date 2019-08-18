@@ -7,6 +7,7 @@ import { ListModule } from 'src/app/components/list/list.module';
 import { MatInputModule, MatDatepickerModule, MatButtonModule, MatIconModule, MatDividerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { FormModule } from 'src/app/components/form/form.module';
+import { ModalModule } from 'src/app/components/modal/modal.module';
 
 @NgModule({
   declarations: [MatchesComponent],
@@ -19,6 +20,7 @@ import { FormModule } from 'src/app/components/form/form.module';
     MatIconModule,
     MatDividerModule,
     FormsModule,
+    ModalModule,
     FormModule,
     ListModule
   ]
