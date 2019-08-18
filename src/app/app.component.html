@@ -1,9 +1,25 @@
 <div class="app-main-container">
   <mat-toolbar>
-    <span>Tournament Manager</span>
-    <button mat-button [routerLink]="[ '/home' ]">HOME</button>
-    <button mat-button [routerLink]="[ '/matches' ]">MATCHES</button>
-    <button mat-button [routerLink]="[ '/standings' ]">STANDINGS</button>
+    <span>
+        <strong class="app-main-title">
+          Tournament Manager
+        </strong>
+    </span>
+    <button mat-button [routerLink]="[ '/home' ]">
+      <strong class="app-sub-title">
+        HOME
+      </strong>
+    </button>
+    <button mat-button [routerLink]="[ '/matches' ]">
+      <strong class="app-sub-title">
+        MATCHES
+      </strong>
+    </button>
+    <button mat-button [routerLink]="[ '/standings' ]">
+      <strong class="app-sub-title">
+        STANDINGS
+      </strong>
+    </button>
   </mat-toolbar>
   
   <div class="page-container">
