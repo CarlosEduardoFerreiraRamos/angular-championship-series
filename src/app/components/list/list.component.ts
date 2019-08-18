@@ -7,6 +7,8 @@ import { Component, OnInit, Input, ContentChild, TemplateRef, Output, EventEmitt
 })
 export class ListComponent {
 
+  @Input() displayedColumns: string[];
+
   @Input()
   get data(): any[] { return this._data; }
   set data(v: any[]) {
@@ -20,7 +22,11 @@ export class ListComponent {
   get columns(): any { return this._columns; }
   set columns(v: any) {
     if (v) {
-      this._columns = Object.keys(v);
+      if (this.displayedColumns) {
+        this._columns = this.displayedColumns;
+      } else {
+        this._columns = Object.keys(v);
+      }
     }
   }
 

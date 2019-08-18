@@ -9,6 +9,8 @@ import { Team, Group } from 'src/app/models/marches';
   styleUrls: ['./standings.component.scss']
 })
 export class StandingsComponent implements OnInit {
+  displayedColumns = ['id',	'name', 'group', 'type', 'points'];
+
   get teamsA(): Observable<Team[]> { return this._teamsA$; }
   set teamsA(v: Observable<Team[]>) {
     this._teamsA$ = v;

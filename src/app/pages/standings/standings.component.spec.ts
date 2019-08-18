@@ -44,6 +44,6 @@ describe('StandingsComponent', () => {
 
   it('should display any', () => {
     const lists = fixture.debugElement.queryAll(By.directive(ListComponent));
-    expect(lists.length).toBeTruthy()
+    expect(lists.length).toBeTruthy();
   });
 });
