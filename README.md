@@ -1,27 +1,33 @@
-# AngularChampionshipSeries
+# Angular Star Championship Series
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
+This project is a team management application that allows the user to set the score of upcoming matches in a fictional football tournament.
 
-## Development server
+## Build & run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Download the project from this it's git repository.
+Install its dependencies with `npm i` at the project root folder.
+Run `ng serve` for a dev server, or npm start, them navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+## Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The application is divided in three main pages:
+* matches, where is displayed all the currently matches and can be set matche score;
+* standings, where is displayed all the currently teams and points;
+* and home, that serves as an intro page and tournament summary.
 
-## Build
+## Data e storage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The application only user in memory data. If the browser refresh all data is lost but it's persists through page navigation.
 
-## Running unit tests
+## Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The application posses a number of unit tests applied in main components and pages, displayed bellow:
+* pages: [matches](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/pages/matches/matches.component.spec.ts) and [standings](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/pages/standings/standings.component.spec.ts);
+* components: [list](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/components/list/list.component.ts) and [modal](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/components/modal/modal.component.spec.ts);
+* services: [match service](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/services/match-service/match.service.spec.ts);
+* and navigation tests in the [app component](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/app.component.spec.ts). 
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Mock back end
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+There is a number of classes that are used to create a mock back end. The first is HttpIntercetor service, and the other is just a service the simulates a back end web layer.
