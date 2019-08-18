@@ -1,6 +1,14 @@
 <strong class="app-section-title">Standings</strong>
 <mat-divider></mat-divider>
-
-<app-list [data]="teams | async">
-
-</app-list>
+<mat-tab-group>
+  <mat-tab label="GROUP A">
+    <div class="tab-container">
+      <app-list [data]="teams | async"></app-list>                
+    </div>
+  </mat-tab>
+  <mat-tab label="GROUP B">
+    <div class="tab-container">
+      <app-list [data]="teams | async"></app-list>
+    </div>
+  </mat-tab>
+</mat-tab-group>

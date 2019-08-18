@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { StandingsRoutingModule } from './standings-routing.module';
 import { StandingsComponent } from './standings.component';
 import { ListModule } from 'src/app/components/list/list.module';
-import { MatDividerModule } from '@angular/material';
+import { MatDividerModule, MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [StandingsComponent],
@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material';
     CommonModule,
     StandingsRoutingModule,
     MatDividerModule,
+    MatTabsModule,
     ListModule
   ]
 })
