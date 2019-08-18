@@ -15,7 +15,7 @@ import { HomeModule } from './pages/home/home.module';
 import { MatchesModule } from './pages/matches/matches.module';
 import { StandingsModule } from './pages/standings/standings.module';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let location: Location;
   // let router: Router;
   let fixture: ComponentFixture<AppComponent>;
@@ -40,7 +40,7 @@ fdescribe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should dsiplay header`, () => {
+  it(`should display header`, () => {
     const toolbar: DebugElement = fixture.debugElement.query(By.directive(MatToolbar));
     expect(toolbar.componentInstance).toBeTruthy();
   });
@@ -86,7 +86,7 @@ fdescribe('AppComponent', () => {
     expect(location.path()).toBe(`/${pathName}`);
   }));
 
-  it('navigate to "" redirects you to /home', fakeAsync(() => {
+  it('navigate to standings', fakeAsync(() => {
     const router = TestBed.get(Router);
     router.initialNavigation();
     const loader = TestBed.get(NgModuleFactoryLoader);
