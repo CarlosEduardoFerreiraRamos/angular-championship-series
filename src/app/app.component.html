@@ -1,68 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="app-main-container">
-  <mat-toolbar color="primary">
+  <mat-toolbar>
     <span>Tournament Manager</span>
     <button mat-button [routerLink]="[ '/home' ]">HOME</button>
     <button mat-button [routerLink]="[ '/matches' ]">MATCHES</button>
     <button mat-button [routerLink]="[ '/standings' ]">STANDINGS</button>
   </mat-toolbar>
-  
-  
-  <!-- <strong>Upcoming Matches</strong>
-  <mat-divider></mat-divider>
-  
-  <table mat-table #tableUpcoming [dataSource]="dataUpcoming">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="teams">
-      <th mat-header-cell *matHeaderCellDef> Teams </th>
-      <td mat-cell *matCellDef="let row"> {{row.teams}} </td>
-    </ng-container>
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.date}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['id', 'teams', 'date']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['id', 'teams', 'date'];"></tr>
-  </table>
-  
-  <strong>Recents Matches</strong>
-  <mat-divider></mat-divider>
-  
-  <table mat-table #tableRecents [dataSource]="dataRecents">
-    <ng-container *ngFor="let name of recentsColumns">
-      <ng-container [matColumnDef]="name">
-        <th mat-header-cell *matHeaderCellDef> {{name}} </th>
-        <td mat-cell *matCellDef="let row"> {{row[name]}} </td>
-      </ng-container>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="recentsColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: recentsColumns;"></tr>
-  </table> -->
-  
-  
-  <!-- <table mat-table #tableStandings [dataSource]="dataStandings">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> name </th>
-      <td mat-cell *matCellDef="let row" (click)="win(row.name)"> {{row.name}} </td>
-    </ng-container>
-    <ng-container matColumnDef="out">
-      <th mat-header-cell *matHeaderCellDef> out </th>
-      <td mat-cell *matCellDef="let row"> {{row.out}} </td>
-    </ng-container>
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> type </th>
-      <td mat-cell *matCellDef="let row"> {{row.type}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['id', 'name', 'out', 'type']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'out', 'type'];"></tr>
-  </table> -->
   
   <div class="page-container">
     <router-outlet></router-outlet>

@@ -1,10 +1,10 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MatchService } from './match.service';
 import { Match } from 'src/app/models/marches';
 import { environment } from 'src/environments/environment.prod';
 
-fdescribe('MatchService', () => {
+describe('MatchService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
@@ -12,7 +12,6 @@ fdescribe('MatchService', () => {
     ],
     providers: [MatchService]
   }));
-
 
   it('should be created service', inject([MatchService], (service: MatchService) => {
     expect(service).toBeTruthy();
