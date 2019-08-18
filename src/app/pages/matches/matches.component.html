@@ -22,7 +22,7 @@
   </div>
 </app-form>
 
-<app-list [data]="matchs | async">
+<app-list [data]="matchs | async" (rowClick)="onRowClick($event)">
   <ng-template let-row let-name="name">
     <div [ngSwitch]="name">
       <div *ngSwitchCase="'teams'">

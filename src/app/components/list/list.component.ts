@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, ContentChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ContentChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   @Input()
   get data(): any[] { return this._data; }
@@ -24,15 +24,21 @@ export class ListComponent implements OnInit {
     }
   }
 
+  @Output() rowClick = new EventEmitter();
+
   @ContentChild(TemplateRef) content: TemplateRef<any>;
 
   private _columns;
 
   private _data: any[];
 
-  constructor() { }
-
-  ngOnInit() {
+  onRowClick(row) {
+    this.rowClick.emit(row);
   }
+
+  get isInteractable(): boolean {
+    return !!this.rowClick.observers.length;
+  }
+
 }
 

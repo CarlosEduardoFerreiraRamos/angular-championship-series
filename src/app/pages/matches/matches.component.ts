@@ -36,6 +36,10 @@ export class MatchesComponent implements OnInit {
     this.fetchMaches($event);
   }
 
+  onRowClick($event: Match) {
+    console.log($event)
+  }
+
   private fetchMaches(values?: any): void {
     this._service.getAll(values).subscribe( matches => this._mastchsList$.next(matches));
   }

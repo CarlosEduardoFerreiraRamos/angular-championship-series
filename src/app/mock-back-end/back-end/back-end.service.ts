@@ -60,6 +60,21 @@ export class BackEndService {
     return [...this.matchs].reverse();
   }
 
+  public getTeamListByGroup(group: Group): Team[] {
+    return this.teams
+      .filter( team => team.group === group)
+      .sort( ({points: a}, {points: b}) => a >= b ? -1 : 1);
+  }
+
+  public getTeamList(): Team[] {
+    return this.teams;
+  }
+
+  public setMatchWinner(name: string) {
+    const team = this.setWinner(name);
+    this.progressWinner(team);
+  }
+
   public getFilteredMatchList(queryParamns: string): Match[] {
     const filters = this.extractQueryParamns(queryParamns);
     return [...this.matchs]
@@ -82,21 +97,6 @@ export class BackEndService {
         }
         return isSimilar;
       });
-  }
-
-  public getTeamList(): Team[] {
-    return this.teams;
-  }
-
-  public getTeamListByGroup(group: Group): Team[] {
-    return this.teams
-      .filter( team => team.group === group)
-      .sort( ({points: a}, {points: b}) => a >= b ? -1 : 1);
-  }
-
-  public setMatchWinner(name) {
-    const team = this.setWinner(name);
-    this.progressWinner(team);
   }
 
   private progressWinner(team: Team) {
