@@ -14,7 +14,7 @@ export class InterceptorService implements HttpInterceptor {
   private manegeRequesitions(request: HttpRequest<any>): HttpResponse<any> {
     let response: any = {status: 200};
     if (request.url.includes('winner')) {
-      this._backEnd.setMatchWinner(request.body.name)
+      this._backEnd.setMatchWinner(request.body.name);
       response = {...response, body: {}};
     } else if (request.method === 'GET' && request.url.includes('teams')) {
       response = {...response, body: this._backEnd.getTeamList()};

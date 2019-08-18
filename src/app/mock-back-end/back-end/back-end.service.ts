@@ -5,34 +5,42 @@ export const TEAMS = [
   {
       id: 1,
       name: 'Sirius',
+      group: 'A'
   },
   {
       id: 2,
       name: 'Betelgeuse',
+      group: 'A'
   },
   {
       id: 3,
       name: 'Rigel',
+      group: 'A'
   },
   {
       id: 4,
       name: 'Vega',
+      group: 'A'
   },
   {
       id: 5,
       name: 'Canopos',
+      group: 'B'
   },
   {
       id: 6,
       name: 'Altair',
+      group: 'B'
   },
   {
       id: 7,
       name: 'Deneb',
+      group: 'B'
   },
   {
       id: 8,
       name: 'Arcturo',
+      group: 'B'
   }
 ];
 
@@ -45,14 +53,14 @@ export class BackEndService {
   matchs: Match[] = [];
 
   constructor() {
-    this.initTeams();
+    this.initTeamsAndMatchs();
   }
 
-  getMatchList(): Match[] {
+  public getMatchList(): Match[] {
     return [...this.matchs].reverse();
   }
 
-  getFilteredMatchList(queryParamns: string): Match[] {
+  public getFilteredMatchList(queryParamns: string): Match[] {
     const filters = this.extractQueryParamns(queryParamns);
     return [...this.matchs]
       .filter( (match: Match) => {
@@ -76,16 +84,16 @@ export class BackEndService {
       });
   }
 
-  getTeamList(): Team[] {
+  public getTeamList(): Team[] {
     return this.teams;
   }
 
-  setMatchWinner(name) {
+  public setMatchWinner(name) {
     const team = this.setWinner(name);
     this.progressWinner(team);
   }
 
-  private progressWinner(team) {
+  private progressWinner(team: Team) {
     if (team.type === Playoffs.FINALS) {
       return;
     }
@@ -96,18 +104,22 @@ export class BackEndService {
     team.type = Playoffs[newStage];
     let match = this.validMatchs
       .reverse()
-      .find( ({type, teams}) => teams.length === 1 && (type === team.type || type === Playoffs.SEMI_FINALS));
+      .find( ({type, teams}) =>
+        teams.length === 1 &&
+        (teams[0].group === team.group || type === Playoffs.FINALS) &&
+        (type === team.type || type === Playoffs.SEMI_FINALS)
+      );
 
     if (!match) {
       match = new Match();
       match.type = team.type;
       match.teams = [team];
+      match.id = this.matchs.length + 1;
       this.matchs.push(match);
     } else {
       match.teams.push(team);
     }
 
-    match.id = this.matchs.length + 1;
     match.played = false;
     const date = new Date();
     date.setDate(match.id);
@@ -128,7 +140,7 @@ export class BackEndService {
     return winner;
   }
 
-  private initTeams(): void {
+  private initTeamsAndMatchs(): void {
     this.teams = TEAMS.map( t => this.progressWinner(new Team(t)));
   }
 

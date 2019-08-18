@@ -29,19 +29,14 @@ export class MatchesComponent implements OnInit {
   }
 
   onSearch($event) {
-    console.log('on subm,it form', $event)
-    this.searchMatchs($event);
+    this.fetchMaches($event);
   }
 
   onValueChanges($event) {
-    console.log('on change form', $event)
+    this.fetchMaches($event);
   }
 
-  private searchMatchs(values: any): void {
+  private fetchMaches(values?: any): void {
     this._service.getAll(values).subscribe( matches => this._mastchsList$.next(matches));
-  }
-
-  private fetchMaches(): void {
-    this._service.getAll().subscribe( matches => this._mastchsList$.next(matches));
   }
 }
