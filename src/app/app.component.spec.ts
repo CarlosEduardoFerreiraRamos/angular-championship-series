@@ -1,35 +1,108 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async, fakeAsync, tick, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { MatToolbar } from '@angular/material';
+import { DebugElement, NgModuleFactoryLoader } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-describe('AppComponent', () => {
+import {RouterTestingModule} from '@angular/router/testing';
+
+import { routes } from './app-routing.module';
+import { HomeModule } from './pages/home/home.module';
+import { MatchesModule } from './pages/matches/matches.module';
+import { StandingsModule } from './pages/standings/standings.module';
+
+fdescribe('AppComponent', () => {
+  let location: Location;
+  // let router: Router;
+  let fixture: ComponentFixture<AppComponent>;
+  let app: AppComponent;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+        HttpClientTestingModule,
+        AppModule,
+        RouterTestingModule.withRoutes(routes)
+      ]
+    }).compileComponents().then( () => {
+      location = TestBed.get(Location);
+      fixture = TestBed.createComponent(AppComponent);
+      app = fixture.debugElement.componentInstance;
+    });
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    fixture = TestBed.createComponent(AppComponent);
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-championship-series'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-championship-series');
+  it(`should dsiplay header`, () => {
+    const toolbar: DebugElement = fixture.debugElement.query(By.directive(MatToolbar));
+    expect(toolbar.componentInstance).toBeTruthy();
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-championship-series!');
-  });
+  it('navigate to "" redirects you to /home', fakeAsync(() => {
+    const router = TestBed.get(Router);
+    router.initialNavigation();
+    const loader = TestBed.get(NgModuleFactoryLoader);
+
+    const path = './pages/home/home.module#HomeModule';
+    const pathName = 'home';
+    loader.stubbedModules =  {
+      [path]: HomeModule
+    };
+
+    router.resetConfig([
+      { path: pathName, loadChildren: path },
+      { path: '**', redirectTo: pathName}
+    ]);
+
+    router.navigate(['']);
+    tick();
+    expect(location.path()).toBe('/home');
+  }));
+
+  it('navigate to matches', fakeAsync(() => {
+    const router = TestBed.get(Router);
+    router.initialNavigation();
+    const loader = TestBed.get(NgModuleFactoryLoader);
+
+    const path = './pages/matches/matches.module#MatchesModule';
+    const pathName = 'matches';
+    loader.stubbedModules =  {
+      [path]: MatchesModule
+    };
+
+    router.resetConfig([
+      { path: pathName, loadChildren: path }
+    ]);
+
+    router.navigate([pathName]);
+    tick();
+    expect(location.path()).toBe(`/${pathName}`);
+  }));
+
+  it('navigate to "" redirects you to /home', fakeAsync(() => {
+    const router = TestBed.get(Router);
+    router.initialNavigation();
+    const loader = TestBed.get(NgModuleFactoryLoader);
+
+    const path = './pages/standings/standings.module#StandingsModule';
+    const pathName = 'standings';
+    loader.stubbedModules =  {
+      [path]: StandingsModule
+    };
+
+    router.resetConfig([
+      { path: pathName, loadChildren: path }
+    ]);
+
+    router.navigate([pathName]);
+    tick();
+    expect(location.path()).toBe(`/${pathName}`);
+  }));
 });
