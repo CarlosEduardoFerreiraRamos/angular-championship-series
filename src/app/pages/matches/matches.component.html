@@ -45,7 +45,7 @@
 <app-modal height="220px" width="400px" #modal>
   <ng-container *ngIf="detail">
     <ng-container *ngIf="(detail.winner || detail.teams.length === 1)  else setCard">
-      <div class="app-card-container">
+      <div class="app-card-container score-display">
         <span class="team-section">
           <div class="team-section-item;"> 
             <strong class="app-sub-title"> {{detail.score ? detail.score[0] : 0 }} </strong>        
@@ -73,7 +73,7 @@
 
 <ng-template #setCard>
   <app-form (formSubmit)="onSubmitScore($event)">
-    <div class="app-card-container">
+    <div #scoresetter class="app-card-container score-setter">
       <span class="team-section">
         <div class="team-section-item;"> 
           <mat-form-field class="form-field">

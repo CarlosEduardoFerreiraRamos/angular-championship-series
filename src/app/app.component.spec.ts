@@ -17,7 +17,6 @@ import { StandingsModule } from './pages/standings/standings.module';
 
 describe('AppComponent', () => {
   let location: Location;
-  // let router: Router;
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
 
