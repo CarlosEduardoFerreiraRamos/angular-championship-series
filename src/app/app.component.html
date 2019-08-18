@@ -25,5 +25,9 @@
   
   <div class="page-container">
     <router-outlet></router-outlet>
+
+    <ng-container *ngIf="isRoutLoading">
+        <mat-spinner class="spinner-position" color="accent"></mat-spinner>
+    </ng-container>
   </div>
 </div>

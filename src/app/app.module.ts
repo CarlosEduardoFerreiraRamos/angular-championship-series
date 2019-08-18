@@ -8,7 +8,7 @@ import { MatchService } from './services/match-service/match.service';
 import { InterceptorServiceModule } from './services/interceptor-service/interceptor-service.module';
 import { BackEndModule } from './mock-back-end/back-end/back-end.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatNativeDateModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { MatToolbarModule, MatButtonModule, MatNativeDateModule } from '@angular
     MatButtonModule,
     MatNativeDateModule,
     InterceptorServiceModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule
   ],
   providers: [MatchService],

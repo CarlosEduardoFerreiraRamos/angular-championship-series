@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HttpResponse } fr
 import { Observable, of } from 'rxjs';
 import { BackEndService } from 'src/app/mock-back-end/back-end/back-end.service';
 import { Group } from 'src/app/models/marches';
+import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -12,7 +13,7 @@ export class InterceptorService implements HttpInterceptor {
     if (request.url.includes('random')) {
       return next.handle(request);
     } else {
-      return  of(this.manegeRequesitions(request));
+      return  of(this.manegeRequesitions(request)).pipe(delay(500));
     }
   }
 

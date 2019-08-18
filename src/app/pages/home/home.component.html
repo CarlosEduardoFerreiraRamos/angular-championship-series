@@ -60,7 +60,7 @@
 <app-list [displayedColumns]="displayedColumns" [data]="teams | async"></app-list>
 
 <ng-template #loadingContent>
-  loading
+    <mat-spinner class="spinner-position" color="accent"></mat-spinner>
 </ng-template>
 
 <ng-template #noPrevious>

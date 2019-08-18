@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  isRoutLoading = false;
 
-  ngOnInit() {  }
+  constructor (private router: Router) {}
+
+   ngOnInit () {
+    this.router.events.subscribe(event => {
+      if (event instanceof RouteConfigLoadStart) {
+          this.isRoutLoading = true;
+      } else if (event instanceof RouteConfigLoadEnd) {
+          this.isRoutLoading = false;
+      }
+    });
+  }
 }
