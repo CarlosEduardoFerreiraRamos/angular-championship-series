@@ -42,6 +42,70 @@
 </app-list>
 
 
-<app-modal #modal>
-in modal
+<app-modal height="220px" width="400px" #modal>
+  <ng-container *ngIf="detail">
+    <ng-container *ngIf="detail.winner else setCard">
+      <div class="app-card-container">
+        <span class="team-section">
+          <div class="team-section-item;"> 
+            <strong class="app-sub-title"> {{detail.score ? detail.score[0] : 0 }} </strong>        
+          </div>
+          <div class="team-section-item;">
+            <strong class="app-sub-title">{{detail.teams[0].name}}</strong>        
+          </div>
+        </span>
+        <span style="height: 100px; line-height: 150px;">
+          <strong class="app-section-title">vs</strong>
+        </span>
+        <span class="team-section">
+          <div class="team-section-item;"> 
+            <strong class="app-sub-title"> {{detail.score ? detail.score[1] : 0  }}</strong>        
+          </div>
+          <div class="team-section-item;">
+            <strong class="app-sub-title">{{detail.teams[1].name}}</strong>        
+          </div>
+        </span>
+      </div>
+      <mat-divider class="card-divider"></mat-divider>
+    </ng-container>
+  </ng-container>
 </app-modal>
+
+<ng-template #setCard>
+  <app-form (formSubmit)="onSubmitScore($event)">
+    <div class="app-card-container">
+      <span class="team-section">
+        <div class="team-section-item;"> 
+          <mat-form-field class="form-field">
+            <input ngModel matInput type="number" name="first" id="first" placeholder="set Score" required>
+          </mat-form-field>
+        </div>
+        <div class="team-section-item;">
+          <strong class="app-sub-title">{{detail.teams[0].name}}</strong>        
+        </div>
+      </span>
+      <span style="height: 100px; line-height: 150px;">
+        <strong class="app-section-title">vs</strong>
+      </span>
+      <span class="team-section">
+        <div class="team-section-item;"> 
+          <mat-form-field class="form-field">
+            <input ngModel matInput type="number" name="secound" id="secound" placeholder="set Score" required>
+          </mat-form-field>
+        </div>
+        <div class="team-section-item;">
+          <strong class="app-sub-title">{{detail.teams[1].name}}</strong>        
+        </div>
+      </span>
+    </div>
+    <mat-divider class="card-divider"></mat-divider>
+    <div class="button-containers">
+      <button class="card-icon" mat-icon-button>
+        <mat-icon>android</mat-icon>
+      </button>
+      <button class="card-icon" type="submit" mat-icon-button>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </app-form>
+</ng-template>

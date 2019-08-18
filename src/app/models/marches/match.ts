@@ -12,6 +12,7 @@ export enum Playoffs {
 export class Match {
   id: number;
   teams: Team[];
+  score: number[];
   winner: Team = null;
   played: boolean;
   type: Playoffs;

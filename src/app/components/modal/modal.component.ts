@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
 
@@ -24,7 +24,11 @@ export class ModalDialogComponent {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
+
+  @Input() height: string;
+
+  @Input() width: string;
 
   @ViewChild(TemplateRef) template: TemplateRef<any>;
 
@@ -32,14 +36,16 @@ export class ModalComponent implements OnInit {
 
   constructor(private _dialog: MatDialog) { }
 
-  ngOnInit() { }
-
   open() {
     this._dialogRef = this._dialog.open(ModalDialogComponent, {
-      // width: '800px',
-      // minHeight: '600px',
+      width: this.width,
+      height: this.height,
       data: { template: this.template }
     });
+  }
+
+  close() {
+    this._dialogRef.close();
   }
 
   onClose(): Observable<any> {

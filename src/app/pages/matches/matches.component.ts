@@ -19,6 +19,8 @@ export class MatchesComponent implements OnInit {
 
   @ViewChild('modal') modal: ModalComponent;
 
+  detail: Match;
+
   private _matchs$: Observable<Match[]>;
 
   private _mastchsList$ = new BehaviorSubject(null);
@@ -39,9 +41,19 @@ export class MatchesComponent implements OnInit {
     this.fetchMaches($event);
   }
 
+  onSubmitScore({first, secound}) {
+    console.log(first, secound);
+    if (first && secound) {
+      this.modal.close();
+    }
+  }
+
   onRowClick($event: Match) {
-    this.modal.onOpen();
-    console.log($event);
+    this.modal.open();
+    this.detail = $event;
+    this.modal.onClose().subscribe( () => {
+      this.detail = null;
+    });
   }
 
   private fetchMaches(values?: any): void {

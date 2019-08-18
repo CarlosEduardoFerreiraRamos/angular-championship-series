@@ -15,5 +15,48 @@ strong {
         font-size: x-large;
         color: $app-gray;
     }
+    &.app-sub-title {
+        margin: 0 8px;
+        line-height: 50px;
+        text-transform: uppercase;
+        font-size: large;
+        color: $app-gray;
+    }
+}
+
+.app-card-container {
+    display: flex;
+    text-align: center;
+    width: 300px;
+    margin: auto;
+
+    .team-section {
+        width:136px;
+        height: 100px;
+
+        .team-section-item {
+            height: 50%;
+            line-height: 50px;
+        }
+
+        .form-field {
+            width: 100px;
+        }
+    }
+}
+.button-containers {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 auto;
+    width: 75%;
+}
+
+button.card-icon {
+    color: $app-gray;
+}
+
+.mat-divider.card-divider {
+    margin: 17px 0 10px 0;
+    border-top-width: 3px;
 }
 
