@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Match, Playoffs, Group, Team } from 'src/app/models/marches';
 
-fdescribe('MatchesComponent', () => {
+describe('MatchesComponent', () => {
   let component: MatchesComponent;
   let fixture: ComponentFixture<MatchesComponent>;
 
