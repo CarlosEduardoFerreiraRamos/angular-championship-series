@@ -1,9 +1,11 @@
+@import "../../../styles.scss";
+
 .form-field-container {
     margin: 0 auto;
     width: 90%;
 
     button {
-        color: #757575
+        color: $app-gray;
     }
 }
 

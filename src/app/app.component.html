@@ -42,10 +42,8 @@
     <tr mat-row *matRowDef="let row; columns: recentsColumns;"></tr>
   </table> -->
   
-  <strong>Standings</strong>
-  <mat-divider></mat-divider>
   
-  <table mat-table #tableStandings [dataSource]="dataStandings">
+  <!-- <table mat-table #tableStandings [dataSource]="dataStandings">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
@@ -65,7 +63,8 @@
     <tr mat-header-row *matHeaderRowDef="['id', 'name', 'out', 'type']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'out', 'type'];"></tr>
   </table>
-  
-  
-  <router-outlet></router-outlet>
+   -->
+  <div class="page-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
