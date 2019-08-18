@@ -9,14 +9,18 @@ export class InterceptorService implements HttpInterceptor {
   constructor(private _backEnd: BackEndService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return  of(this.manegeRequesitions(request));
+    if (request.url.includes('random')) {
+      return next.handle(request);
+    } else {
+      return  of(this.manegeRequesitions(request));
+    }
   }
 
   private manegeRequesitions(request: HttpRequest<any>): HttpResponse<any> {
     const {url, method} = request;
     let response: any = {status: 200};
-    if (url.includes('winner')) {
-      this._backEnd.setMatchWinner(request.body.name);
+    if (url.includes('score')) {
+      this._backEnd.setMatchScore(request.body.score);
       response = {...response, body: {}};
     } else if (method === 'GET' && url.includes('teams') && (url.includes('A') || url.includes('B'))) {
       const [group] = url.split('/').reverse();

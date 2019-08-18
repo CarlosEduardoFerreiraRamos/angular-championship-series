@@ -44,7 +44,7 @@
 
 <app-modal height="220px" width="400px" #modal>
   <ng-container *ngIf="detail">
-    <ng-container *ngIf="detail.winner else setCard">
+    <ng-container *ngIf="(detail.winner || detail.teams.length === 1)  else setCard">
       <div class="app-card-container">
         <span class="team-section">
           <div class="team-section-item;"> 
@@ -62,7 +62,7 @@
             <strong class="app-sub-title"> {{detail.score ? detail.score[1] : 0  }}</strong>        
           </div>
           <div class="team-section-item;">
-            <strong class="app-sub-title">{{detail.teams[1].name}}</strong>        
+            <strong class="app-sub-title">{{detail.teams[1]? detail.teams[1].name : 'TBD'}}</strong>        
           </div>
         </span>
       </div>
@@ -90,7 +90,7 @@
       <span class="team-section">
         <div class="team-section-item;"> 
           <mat-form-field class="form-field">
-            <input ngModel matInput type="number" name="secound" id="secound" placeholder="set Score" required>
+            <input ngModel matInput type="number" name="second" id="second" placeholder="set Score" required>
           </mat-form-field>
         </div>
         <div class="team-section-item;">
@@ -100,7 +100,7 @@
     </div>
     <mat-divider class="card-divider"></mat-divider>
     <div class="button-containers">
-      <button class="card-icon" mat-icon-button>
+      <button class="card-icon" (click)="onRandomScore()" mat-icon-button>
         <mat-icon>android</mat-icon>
       </button>
       <button class="card-icon" type="submit" mat-icon-button>

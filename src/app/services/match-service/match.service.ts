@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Match, Team, Group } from 'src/app/models/marches';
+import { Match, Team, Group, ScoreDTO } from 'src/app/models/marches';
 
 @Injectable()
 export class MatchService {
@@ -30,6 +30,14 @@ export class MatchService {
     return this._http.post(`${this.basePath}/winner`, {name});
   }
 
+  public setMatchScore(score: ScoreDTO): Observable<any> {
+    return this._http.post(`${this.basePath}/score`, {score});
+  }
+
+  public getRandomNumbers(): Observable<any> {
+    return this._http.get(environment.randomApi, {responseType: 'text'});
+  }
+
   private get basePath(): string {
     return `${environment.api}/match`;
   }
@@ -37,7 +45,7 @@ export class MatchService {
   private buildQueryParamns(paramns): string {
     const keyValue = Object.keys(paramns)
       .filter( key => paramns[key])
-      .reduce( ( value, key) => `${value ? `${value},` : value }${key}=${paramns[key]}`, '');
+      .reduce( ( value, key) => `${value ? `${value}&` : value }${key}=${paramns[key]}`, '');
     return keyValue ? `?${keyValue}` : '';
   }
 }

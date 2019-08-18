@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Team, Match, Playoffs, Group } from 'src/app/models/marches';
+import { Team, Match, Playoffs, Group, ScoreDTO } from 'src/app/models/marches';
 
 export const TEAMS = [
   {
@@ -70,7 +70,10 @@ export class BackEndService {
     return this.teams;
   }
 
-  public setMatchWinner(name: string) {
+  public setMatchScore(score: ScoreDTO) {
+    const match = this.getMatch(score.matchId);
+    const name = score.first > score.second ? match.teams[0].name : match.teams[1].name;
+    match.score = [score.first, score.second];
     const team = this.setWinner(name);
     this.progressWinner(team);
   }
@@ -155,12 +158,16 @@ export class BackEndService {
     team.out = true;
   }
 
+  private getMatch(matchId: number): Match {
+    return this.matchs.find( ({id}) => matchId === id);
+  }
+
   private get validMatchs(): Match[] {
     return this.matchs.filter( ({played}) => !played );
   }
 
   private extractQueryParamns(aqueryParamns: string): any {
-    return aqueryParamns.split(',').reduce( (paramns, keyValue) => {
+    return aqueryParamns.split('&').reduce( (paramns, keyValue) => {
       const [ key, value] = keyValue.split('=');
       return {...paramns, [key]: value };
     }, {});

@@ -1,1 +1,1 @@
-export { Match, Group, Team, Playoffs } from './match';
+export { Match, Group, Team, Playoffs, ScoreDTO } from './match';

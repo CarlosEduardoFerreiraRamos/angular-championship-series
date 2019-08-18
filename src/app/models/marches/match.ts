@@ -9,6 +9,17 @@ export enum Playoffs {
   FINALS = 'FINALS'
 }
 
+export class ScoreDTO {
+  first: number;
+  second: number;
+  matchId: number;
+  constructor(data: any) {
+    this.first = data.first;
+    this.second = data.second;
+    this.matchId = data.matchId;
+  }
+}
+
 export class Match {
   id: number;
   teams: Team[];
