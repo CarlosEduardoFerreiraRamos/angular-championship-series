@@ -89,7 +89,9 @@ export class BackEndService {
   }
 
   public getTeamListByGroup(group: Group): Team[] {
-    return this.teams.filter( team => team.group === group);
+    return this.teams
+      .filter( team => team.group === group)
+      .sort( ({points: a}, {points: b}) => a >= b ? -1 : 1);
   }
 
   public setMatchWinner(name) {
@@ -136,6 +138,7 @@ export class BackEndService {
       .reverse()
       .find( ({teams}) => teams.map( ({name: n}) => n).includes(name));
     const winner = this.teams.find( ({name: n}) => n === name);
+    winner.points += 100;
     match.winner = winner;
     match.played = true;
 

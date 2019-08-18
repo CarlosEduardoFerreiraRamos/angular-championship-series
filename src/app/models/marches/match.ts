@@ -12,7 +12,7 @@ export enum Playoffs {
 export class Match {
   id: number;
   teams: Team[];
-  winner: Team;
+  winner: Team = null;
   played: boolean;
   type: Playoffs;
   date: Date;
@@ -23,6 +23,7 @@ export class Team {
   name: string;
   group: Group;
   out: boolean;
+  points: number;
   type: Playoffs;
   constructor(data?: any) {
     if (!data) {
@@ -32,6 +33,7 @@ export class Team {
     this.name = data.name;
     this.group = data.group;
     this.type = data.type;
+    this.points = 0;
     this.out = false;
   }
 }
