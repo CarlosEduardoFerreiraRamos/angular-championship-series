@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Match, Team } from 'src/app/models/marches';
+import { Match, Team, Group } from 'src/app/models/marches';
 
 @Injectable()
 export class MatchService {
@@ -16,6 +16,10 @@ export class MatchService {
 
   public getAllTeams(): Observable<Team[]> {
     return this._http.get<Team[]>(`${this.basePath}/teams`);
+  }
+
+  public getTeamsByGroup(group: Group): Observable<Team[]> {
+    return this._http.get<Team[]>(`${this.basePath}/teams/${group}`);
   }
 
   public get(id: number): Observable<Match> {

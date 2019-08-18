@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Team, Match, Playoffs } from 'src/app/models/marches';
+import { Team, Match, Playoffs, Group } from 'src/app/models/marches';
 
 export const TEAMS = [
   {
@@ -86,6 +86,10 @@ export class BackEndService {
 
   public getTeamList(): Team[] {
     return this.teams;
+  }
+
+  public getTeamListByGroup(group: Group): Team[] {
+    return this.teams.filter( team => team.group === group);
   }
 
   public setMatchWinner(name) {

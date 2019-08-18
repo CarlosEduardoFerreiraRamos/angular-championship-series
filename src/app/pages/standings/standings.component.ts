@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from 'src/app/services/match-service/match.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Team } from 'src/app/models/marches';
+import { Team, Group } from 'src/app/models/marches';
 
 @Component({
   selector: 'app-standings',
@@ -9,17 +9,24 @@ import { Team } from 'src/app/models/marches';
   styleUrls: ['./standings.component.scss']
 })
 export class StandingsComponent implements OnInit {
-  get teams(): Observable<Team[]> { return this._teams$; }
-  set teams(v: Observable<Team[]>) {
-    this._teams$ = v;
+  get teamsA(): Observable<Team[]> { return this._teamsA$; }
+  set teamsA(v: Observable<Team[]>) {
+    this._teamsA$ = v;
   }
 
-  private _teams$: Observable<Team[]>;
+  get teamsB(): Observable<Team[]> { return this._teamsB$; }
+  set teamsB(v: Observable<Team[]>) {
+    this._teamsB$ = v;
+  }
 
-  private _teamList$ = new BehaviorSubject(null);
+  private _teamsA$: Observable<Team[]>;
+  private _teamsB$: Observable<Team[]>;
+  private _teamListA$ = new BehaviorSubject(null);
+  private _teamListB$ = new BehaviorSubject(null);
 
   constructor(private _service: MatchService) {
-    this.teams = this._teamList$.asObservable();
+    this.teamsB = this._teamListB$.asObservable();
+    this.teamsA = this._teamListA$.asObservable();
   }
 
   ngOnInit() {
@@ -27,7 +34,8 @@ export class StandingsComponent implements OnInit {
   }
 
   private fetchTeams(): void {
-    this._service.getAllTeams().subscribe( teams => this._teamList$.next(teams));
+    this._service.getTeamsByGroup(Group.A).subscribe( teams => this._teamListA$.next(teams));
+    this._service.getTeamsByGroup(Group.B).subscribe( teams => this._teamListB$.next(teams));
   }
 
 }
