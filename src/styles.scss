@@ -28,7 +28,18 @@ strong {
         text-transform: uppercase;
         font-size: x-large;
         color: #757575ab;
+        .sub {
+            font-size: large;
+            margin: 0 16px;
+        }
     }
+}
+
+.card-overlay {
+    width: 420px;
+    height: 151px;
+    margin: auto;
+    padding: 0 14px 14px;
 }
 
 .app-card-container {
@@ -65,5 +76,27 @@ button.card-icon {
 .mat-divider.card-divider {
     margin: 17px 0 10px 0;
     border-top-width: 3px;
+}
+
+span {
+    &.detail-container {
+        display: inline-flex;
+        width: 82%;
+        position: relative;
+
+        small {
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            color: $app-gray;
+            cursor: pointer;
+            &.previous {
+                right: -60px;
+            }
+            &.teams {
+                right: -10px;
+            }
+        }
+    }
 }
 

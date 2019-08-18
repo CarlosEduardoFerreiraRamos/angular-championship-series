@@ -1,3 +1,75 @@
-<p>
-  home works!
-</p>
+<strong class="app-section-title">Next Match</strong> <span class="detail-container"><small [routerLink]="[ '/matches' ]" title="Go to Matchs">more details</small></span>
+<mat-divider></mat-divider>
+
+<div class="card-overlay mat-elevation-z8">
+  <div *ngIf="next; else loadingContent" class="app-card-container score-display">
+    <span class="team-section">
+      <div class="team-section-item;"> 
+        <strong class="app-sub-title"> {{next.score ? next.score[0] : 0 }} </strong>        
+      </div>
+      <div class="team-section-item;">
+        <strong class="app-sub-title">{{next.teams[0].name}}</strong>        
+      </div>
+    </span>
+    <span style="height: 100px; line-height: 150px;">
+      <strong class="app-section-title">vs</strong>
+    </span>
+    <span class="team-section">
+      <div class="team-section-item;"> 
+        <strong class="app-sub-title"> {{next.score ? next.score[1] : 0  }}</strong>        
+      </div>
+      <div class="team-section-item;">
+        <strong class="app-sub-title">{{next.teams[1]? next.teams[1].name : 'TBD'}}</strong>        
+      </div>
+    </span>
+  </div>
+  <mat-divider class="card-divider"></mat-divider>
+</div>
+
+<strong class="app-section-title">Previus</strong><span class="detail-container"><small class="previous" [routerLink]="[ '/matches' ]" title="Go to Matchs">more details</small></span>
+<mat-divider></mat-divider>
+
+<div *ngIf="!(hasLoadedPrevious && !previous) else noPrevious" class="card-overlay mat-elevation-z8">
+  <div *ngIf="previous; else loadingContent" class="app-card-container score-display">
+    <span class="team-section">
+      <div class="team-section-item;"> 
+        <strong class="app-sub-title"> {{previous.score ? previous.score[0] : 0 }} </strong>        
+      </div>
+      <div class="team-section-item;">
+        <strong class="app-sub-title">{{previous.teams[0].name}}</strong>        
+      </div>
+    </span>
+    <span style="height: 100px; line-height: 150px;">
+      <strong class="app-section-title">vs</strong>
+    </span>
+    <span class="team-section">
+      <div class="team-section-item;"> 
+        <strong class="app-sub-title"> {{previous.score ? previous.score[1] : 0  }}</strong>        
+      </div>
+      <div class="team-section-item;">
+        <strong class="app-sub-title">{{previous.teams[1]? previous.teams[1].name : 'TBD'}}</strong>        
+      </div>
+    </span>
+  </div>
+  <mat-divider class="card-divider"></mat-divider>
+</div>
+
+<strong class="app-section-title">BEST TEAMS</strong><span class="detail-container"><small class="teams" [routerLink]="[ '/standings' ]" title="Go to Standings">more details</small></span>
+<mat-divider></mat-divider>
+
+<app-list [displayedColumns]="displayedColumns" [data]="teams | async"></app-list>
+
+<ng-template #loadingContent>
+  loading
+</ng-template>
+
+<ng-template #noPrevious>
+  <div class="card-overlay mat-elevation-z8">
+    <div class="text-container">
+      <strong class="app-sub-title">
+        NO MATCH PLAYED YET
+      </strong>
+    </div>
+    <mat-divider class="card-divider"></mat-divider>
+  </div>
+</ng-template>

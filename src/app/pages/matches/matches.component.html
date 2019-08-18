@@ -4,19 +4,19 @@
 <app-form (valueChanges)="onValueChanges($event)" (formSubmit)="onSearch($event)">
   <div class="form-field-container">
     <mat-form-field class="form-text-search">
-      <input ngModel matInput type="text" name="team" id="team" placeholder="Search by team">
+      <input ngModel matInput type="text" name="team" id="team" placeholder="Search by team name">
     </mat-form-field>
     <mat-form-field>
-      <input ngModel matInput [matDatepicker]="pickerBefore" name="dateBefore" placeholder="Choose a date">
+      <input ngModel matInput [matDatepicker]="pickerBefore" name="dateBefore" placeholder="Choose a date from">
       <mat-datepicker-toggle matSuffix [for]="pickerBefore"></mat-datepicker-toggle>
       <mat-datepicker #pickerBefore></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input ngModel matInput [matDatepicker]="pickerAfter" name="dateAfter" placeholder="Choose a date">
+      <input ngModel matInput [matDatepicker]="pickerAfter" name="dateAfter" placeholder="Choose a date to">
       <mat-datepicker-toggle matSuffix [for]="pickerAfter"></mat-datepicker-toggle>
       <mat-datepicker #pickerAfter></mat-datepicker>
     </mat-form-field>
-    <button type="submit" mat-icon-button>
+    <button type="submit" title="Search" mat-icon-button>
         <mat-icon>search</mat-icon>
     </button>
   </div>
@@ -24,7 +24,7 @@
 
 <app-list [displayedColumns]="['id','teams','type','winner', 'date']" [data]="matchs | async" (rowClick)="onRowClick($event)">
   <ng-template let-row let-name="name">
-    <div [ngSwitch]="name">
+    <div [ngSwitch]="name" title="Open detail">
       <div *ngSwitchCase="'teams'">
         {{ row[0]?.name }} vs {{ row[1]?.name }}
       </div>
@@ -77,7 +77,7 @@
       <span class="team-section">
         <div class="team-section-item;"> 
           <mat-form-field class="form-field">
-            <input ngModel matInput type="number" name="first" id="first" placeholder="set Score" required>
+            <input ngModel matInput type="number" name="first" id="first" placeholder="Set {{detail.teams[0].name}} score" required>
           </mat-form-field>
         </div>
         <div class="team-section-item;">
@@ -90,7 +90,7 @@
       <span class="team-section">
         <div class="team-section-item;"> 
           <mat-form-field class="form-field">
-            <input ngModel matInput type="number" name="second" id="second" placeholder="set Score" required>
+            <input ngModel matInput type="number" name="second" id="second" placeholder="Set {{detail.teams[1].name}} score" required>
           </mat-form-field>
         </div>
         <div class="team-section-item;">
@@ -100,10 +100,10 @@
     </div>
     <mat-divider class="card-divider"></mat-divider>
     <div class="button-containers">
-      <button class="card-icon" (click)="onRandomScore()" mat-icon-button>
+      <button class="card-icon" title="Randomise Results" (click)="onRandomScore()" mat-icon-button>
         <mat-icon>android</mat-icon>
       </button>
-      <button class="card-icon" type="submit" mat-icon-button>
+      <button class="card-icon" title="Save Results" type="submit" mat-icon-button>
         <mat-icon>save</mat-icon>
       </button>
     </div>

@@ -14,12 +14,24 @@ export class MatchService {
     return this._http.get<Match[]>(path);
   }
 
+  public getNextMatch(): Observable<Match> {
+    return this._http.get<Match>(`${this.basePath}/next`);
+  }
+
+  public getPreviousMatch(): Observable<Match> {
+    return this._http.get<Match>(`${this.basePath}/previous`);
+  }
+
   public getAllTeams(): Observable<Team[]> {
     return this._http.get<Team[]>(`${this.basePath}/teams`);
   }
 
   public getTeamsByGroup(group: Group): Observable<Team[]> {
     return this._http.get<Team[]>(`${this.basePath}/teams/${group}`);
+  }
+
+  public getTeamListFirst(): Observable<Team[]> {
+    return this._http.get<Team[]>(`${this.basePath}/teams/firsts`);
   }
 
   public get(id: number): Observable<Match> {

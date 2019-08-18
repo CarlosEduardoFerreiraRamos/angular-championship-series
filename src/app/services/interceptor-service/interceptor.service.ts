@@ -25,8 +25,14 @@ export class InterceptorService implements HttpInterceptor {
     } else if (method === 'GET' && url.includes('teams') && (url.includes('A') || url.includes('B'))) {
       const [group] = url.split('/').reverse();
       response = {...response, body: this._backEnd.getTeamListByGroup(Group[group])};
+    } else if (method === 'GET' && url.includes('teams') && url.includes('firsts')) {
+        response = {...response, body: this._backEnd.getTeamListFirst()};
     } else if (method === 'GET' && url.includes('teams')) {
       response = {...response, body: this._backEnd.getTeamList()};
+    } else if (method === 'GET' && url.includes('next')) {
+      response = {...response, body: this._backEnd.getNextMatch()};
+    } else if (method === 'GET' && url.includes('previous')) {
+      response = {...response, body: this._backEnd.getPreviousMatch()};
     } else if (method === 'GET' && url.includes('?') ) {
       const [, queryParamns] = url.split('?');
       response = {...response, body: this._backEnd.getFilteredMatchList(queryParamns)};

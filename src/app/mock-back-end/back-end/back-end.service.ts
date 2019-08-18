@@ -66,8 +66,23 @@ export class BackEndService {
       .sort( ({points: a}, {points: b}) => a >= b ? -1 : 1);
   }
 
+  public getTeamListFirst(): Team[] {
+    const [ first, second, thirth] =  this.teams
+    .sort( ({points: a}, {points: b}) => a >= b ? -1 : 1);
+
+    return [first, second, thirth];
+  }
+
   public getTeamList(): Team[] {
     return this.teams;
+  }
+
+  public getNextMatch(): Match {
+    return this.matchs.find( m => !m.played);
+  }
+
+  public getPreviousMatch(): Match {
+    return this.matchs.find( m => m.played);
   }
 
   public setMatchScore(score: ScoreDTO) {
