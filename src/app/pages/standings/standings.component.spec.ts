@@ -38,6 +38,11 @@ describe('StandingsComponent', () => {
     fixture.detectChanges();
   });
 
+  afterAll( () => {
+    const element: HTMLElement = fixture.nativeElement;
+    document.body.removeChild(element);
+  });
+
   it('should create componet', () => {
     expect(component).toBeTruthy();
   });
