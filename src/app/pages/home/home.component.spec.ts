@@ -1,12 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
-import { HomeModule } from './home.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatchService } from 'src/app/services/match-service/match.service';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from './home-routing.module';
+import { CommonModule } from '@angular/common';
+import { MatDividerModule, MatProgressSpinnerModule } from '@angular/material';
+import { ListModule } from 'src/app/components/list/list.module';
+import { Input, HostListener, Directive } from '@angular/core';
+
+@Directive({
+  selector: '[routerLink]'
+})
+export class RouterLinkDirectiveStub {
+  @Input('routerLink') linkParams: any;
+  navigatedTo: any = null;
+
+  @HostListener('click')
+  onClick() {
+    this.navigatedTo = this.linkParams;
+  }
+}
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,10 +26,16 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [
+        HomeComponent,
+        RouterLinkDirectiveStub
+      ],
       imports: [
         HttpClientTestingModule,
-        HomeModule,
-        RouterTestingModule.withRoutes(routes)
+        CommonModule,
+        MatDividerModule,
+        MatProgressSpinnerModule,
+        ListModule
       ],
       providers: [MatchService]
     })
@@ -25,8 +43,6 @@ describe('HomeComponent', () => {
   }));
 
   beforeEach(() => {
-    const router = TestBed.get(Router);
-    router.initialNavigation();
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
