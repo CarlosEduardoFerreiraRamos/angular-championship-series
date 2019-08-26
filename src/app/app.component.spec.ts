@@ -19,6 +19,7 @@ describe('AppComponent', () => {
   let location: Location;
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,9 +31,15 @@ describe('AppComponent', () => {
     }).compileComponents().then( () => {
       location = TestBed.get(Location);
       fixture = TestBed.createComponent(AppComponent);
+      router = TestBed.get(Router);
       app = fixture.debugElement.componentInstance;
     });
   }));
+
+  afterAll( () => {
+    const element: HTMLElement = fixture.nativeElement;
+    document.body.removeChild(element);
+  });
 
   it('should create the app', () => {
     fixture = TestBed.createComponent(AppComponent);
@@ -44,64 +51,58 @@ describe('AppComponent', () => {
     expect(toolbar.componentInstance).toBeTruthy();
   });
 
-  it('navigate to "" redirects you to /home', fakeAsync(() => {
-    const router = TestBed.get(Router);
-    router.initialNavigation();
-    const loader = TestBed.get(NgModuleFactoryLoader);
-
+  it('navigate to "" redirects you to /home', () => {
     const path = './pages/home/home.module#HomeModule';
     const pathName = 'home';
+    const loader = TestBed.get(NgModuleFactoryLoader);
     loader.stubbedModules =  {
       [path]: HomeModule
     };
-
     router.resetConfig([
       { path: pathName, loadChildren: path },
       { path: '**', redirectTo: pathName}
     ]);
 
-    router.navigate(['']);
-    tick();
-    expect(location.path()).toBe('/home');
-  }));
+    fixture.ngZone.run( async () => {
+      router.initialNavigation();
+      await router.navigate([''])
+      expect(location.path()).toBe(`/${pathName}`);
+    })
+  });
 
-  it('navigate to matches', fakeAsync(() => {
-    const router = TestBed.get(Router);
-    router.initialNavigation();
-    const loader = TestBed.get(NgModuleFactoryLoader);
-
+  it('navigate to matches', () => {
     const path = './pages/matches/matches.module#MatchesModule';
     const pathName = 'matches';
+    const loader = TestBed.get(NgModuleFactoryLoader);
     loader.stubbedModules =  {
       [path]: MatchesModule
     };
-
     router.resetConfig([
       { path: pathName, loadChildren: path }
     ]);
 
-    router.navigate([pathName]);
-    tick();
-    expect(location.path()).toBe(`/${pathName}`);
-  }));
+    fixture.ngZone.run( async () => {
+      router.initialNavigation();
+      await router.navigate([pathName])
+      expect(location.path()).toBe(`/${pathName}`);
+    })
+  });
 
-  it('navigate to standings', fakeAsync(() => {
-    const router = TestBed.get(Router);
-    router.initialNavigation();
-    const loader = TestBed.get(NgModuleFactoryLoader);
-
+  it('navigate to standings', () => {
     const path = './pages/standings/standings.module#StandingsModule';
     const pathName = 'standings';
+    const loader = TestBed.get(NgModuleFactoryLoader);
     loader.stubbedModules =  {
       [path]: StandingsModule
     };
-
     router.resetConfig([
       { path: pathName, loadChildren: path }
     ]);
 
-    router.navigate([pathName]);
-    tick();
-    expect(location.path()).toBe(`/${pathName}`);
-  }));
+    fixture.ngZone.run( async () => {
+      router.initialNavigation();
+      await router.navigate([pathName])
+      expect(location.path()).toBe(`/${pathName}`);
+    })
+  });
 });
