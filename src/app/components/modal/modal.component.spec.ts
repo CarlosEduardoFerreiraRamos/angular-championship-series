@@ -5,29 +5,36 @@ import { Component, DebugElement } from '@angular/core';
 import { ModalModule } from './modal.module';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({template: `
   <app-modal>
-    INNER_TEXT
+    <div class="target">INNER_TEXT</div>
   </app-modal>
 `})
 export class TestModalComponent {}
 
 describe('ModalComponent', () => {
-  let component: TestModalComponent;
   let fixture: ComponentFixture<TestModalComponent>;
+  let overlayContainerElement: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ModalModule, BrowserAnimationsModule],
       declarations: [ TestModalComponent ],
+      providers: [{
+        provide: OverlayContainer,
+        useFactory: () => {
+          overlayContainerElement = document.createElement('div')
+          return { getContainerElement: () => overlayContainerElement }
+        }
+      }]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestModalComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -41,7 +48,7 @@ describe('ModalComponent', () => {
     const modalComp: ModalComponent = debug.componentInstance;
     modalComp.open();
     fixture.detectChanges();
-    const content = fixture.debugElement.nativeElement.offsetParent.querySelector('mat-dialog-container').innerText;
+    const content = overlayContainerElement.querySelector<HTMLElement>('.target').innerText;
     expect(content).toEqual('INNER_TEXT');
   });
 });
