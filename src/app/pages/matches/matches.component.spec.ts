@@ -18,10 +18,12 @@ import { ListModule } from 'src/app/components/list/list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Match, Playoffs, Group, Team } from 'src/app/models/marches';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 describe('MatchesComponent', () => {
   let component: MatchesComponent;
   let fixture: ComponentFixture<MatchesComponent>;
+  let overlayContainerElement: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,7 +44,16 @@ describe('MatchesComponent', () => {
         ListModule
       ],
       declarations: [ MatchesComponent ],
-      providers: [MatchService]
+      providers: [
+        MatchService,
+        {
+          provide: OverlayContainer,
+          useFactory: () => {
+            overlayContainerElement = document.createElement('div')
+            return { getContainerElement: () => overlayContainerElement }
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
@@ -82,7 +93,7 @@ describe('MatchesComponent', () => {
 
     fixture.detectChanges();
     await fixture.whenStable();
-    const e = fixture.debugElement.nativeElement.offsetParent.querySelector('.score-setter');
+    const e = overlayContainerElement.querySelector('.score-setter');
     expect(e).toBeTruthy();
   });
 
@@ -112,7 +123,7 @@ describe('MatchesComponent', () => {
 
     fixture.detectChanges();
     await fixture.whenStable();
-    const e = fixture.debugElement.nativeElement.offsetParent.querySelector('.score-display');
+    const e = overlayContainerElement.querySelector('.score-display');
     expect(e).toBeTruthy();
   });
 });
