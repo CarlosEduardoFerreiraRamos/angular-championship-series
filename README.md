@@ -27,6 +27,7 @@ The application possess a number of unit tests applied in the main components an
 * services: [match service](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/services/match-service/match.service.spec.ts);
 * and navigation tests in the [app component](https://github.com/CarlosEduardoFerreiraRamos/angular-championship-series/blob/master/src/app/app.component.spec.ts). 
 
+# CI
 
 ## Mock back end
 
